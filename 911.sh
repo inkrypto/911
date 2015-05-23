@@ -1,9 +1,15 @@
-BIN="/var/mobile/Containers/Bundle/Application/E3015218-A6C7-446E-A4CE-CB388DC245BF/Publix.app/Publix"
+#!/bin/bash
+
+echo "Enter the path to the binary you wish to test. For instance, /var/mobile/Containers/Bundle/Application/E3015218-A6C7-446E-A4CE-CB388DC245BF/UberClient.app/UberClient "
+echo -n "Paste path here: "
+
+read BIN
 
 strings -a - $BIN > binary_strings.txt
 
 FILE=binary_strings.txt
 
+echo ""
 echo "Checking for vulnerabilities"
 echo "1. Binary Protection ARC (vulnerable if absent)"
 arc=$(strings -a - < $FILE |grep "_objc_release\|_objc_autoreleaseReturnValue\|_objc_retain")
